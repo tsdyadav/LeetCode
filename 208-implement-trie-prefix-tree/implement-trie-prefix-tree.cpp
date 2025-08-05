@@ -21,7 +21,7 @@ public:
 
     void insert(string word) {
         TrieNode* node = root;
-        for (char ch : word) {
+        for (char ch : word) { //
             int index = ch - 'a';
             if (node->children[index] == nullptr) {
                 node->children[index] = new TrieNode();
