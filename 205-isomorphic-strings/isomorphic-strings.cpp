@@ -1,5 +1,5 @@
-#include <unordered_map>
 #include <string>
+#include <vector>
 using namespace std;
 
 class Solution {
@@ -7,22 +7,21 @@ public:
     bool isIsomorphic(string s, string t) {
         if (s.size() != t.size()) return false;
 
-        unordered_map<char, char> mapST;  // s -> t
-        unordered_map<char, char> mapTS;  // t -> s
+        // last seen positions; initialized to 0
+        vector<int> lastS(256, 0);
+        vector<int> lastT(256, 0);
 
-        for (size_t i = 0; i < s.size(); ++i) {
+        for (int i = 0; i < s.size(); i++) {
             char c1 = s[i];
             char c2 = t[i];
 
-            // Check existing mapping s->t
-            if (mapST.count(c1) && mapST[c1] != c2) return false;
-            // Check existing mapping t->s
-            if (mapTS.count(c2) && mapTS[c2] != c1) return false;
+            // If previous positions don't match, mapping is inconsistent
+            if (lastS[c1] != lastT[c2]) return false;
 
-            // Record new mappings
-            mapST[c1] = c2;
-            mapTS[c2] = c1;
+            // Record current position +1 (so 0 remains "not seen")
+            lastS[c1] = i + 1;
+            lastT[c2] = i + 1;
         }
-      return true;
+        return true;
     }
 };
