@@ -14,16 +14,12 @@ class Solution {
    
         void inorder(TreeNode* parent,vector<int> &ans)
         {
- if (parent==nullptr)
-        return  ;
+        if (parent==nullptr)
+            return  ;
 
-
-    inorder(parent->left,ans);
-    
-    inorder(parent->right,ans);
-    ans.push_back(parent->val);
-    
-
+        inorder(parent->left,ans);
+        inorder(parent->right,ans);
+        ans.push_back(parent->val);  
     }
 public:
     vector<int> postorderTraversal(TreeNode* root) {
