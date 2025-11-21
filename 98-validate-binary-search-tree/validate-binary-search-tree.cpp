@@ -10,24 +10,22 @@
  * };
  */
 class Solution {
-
 public:
- bool BST(TreeNode* root,long long &prev){
-    if(!root)
-    return 1;
-    bool l= BST(root->left,prev);
-    if(l==0)
-    return 0;
-    if((root->val)<=prev)
-    return 0;
-    prev=root->val;
-    return BST(root->right,prev);
-
- }
+    vector<int>temp;
+    void inorder(TreeNode* root)
+    {
+          if (root == nullptr) return;
+        //inorder left root right;
+        inorder(root->left);
+        temp.push_back(root->val);
+        inorder(root->right);
+    }
     bool isValidBST(TreeNode* root) {
-        long long prev=LLONG_MIN;
-        bool ans=BST( root,prev);
-        return ans;
-        
+        inorder(root);
+          for (int i = 1; i < temp.size(); i++) {
+            if (temp[i] <= temp[i - 1])  
+                return false;
+        }
+        return true;
     }
 };
