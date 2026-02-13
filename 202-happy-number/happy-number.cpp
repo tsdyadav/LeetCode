@@ -1,25 +1,24 @@
 class Solution {
 public:
-int rolesqure(int n)
-{
-    int sum=0;
-    while(n!=0)
+    int squre(int n)
     {
-        int temp=n%10;
-        sum+=temp*temp;
-        n=n/10;
-    }
-    return sum;
-}
-    bool isHappy(int n) {
-        unordered_set<int> uni;
-        while(n!=1)
+        int sum=0;
+        while(n)
         {
-            if(uni.count(n)) return false;
-            uni.insert(n);
-            n=rolesqure(n);
+            int temp=n%10;
+            sum+=temp*temp;
+            n=n/10;
         }
-        return true;
-        
+        return sum;
+    }
+    bool isHappy(int n) {
+       unordered_set<int>uniq;
+       while(n!=1)
+       {
+        if(uniq.count(n)) return false;
+        uniq.insert(n);
+        n=squre(n);
+       } 
+       return true;
     }
 };
