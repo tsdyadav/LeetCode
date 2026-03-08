@@ -1,22 +1,25 @@
 class Solution {
 public:
-void subseq(vector<int>& nums,int index,vector<vector<int>>&ans,vector<int> temp)
+void solver(int i,vector<int>& nums,vector<int>& temp,vector<vector<int>>& ans)
 {
-    if(index==nums.size())
+    if(i==nums.size())
     {
         ans.push_back(temp);
         return;
     }
-    subseq(nums,index+1,ans,temp);
-    temp.push_back(nums[index]);
-    subseq(nums,index+1,ans,temp);
+    // pick
+    temp.push_back(nums[i]);
+    solver(i+1,nums,temp,ans);
+    //backtrak
     temp.pop_back();
+    //not pikking
+    solver(i+1,nums,temp,ans);
+
 }
     vector<vector<int>> subsets(vector<int>& nums) {
-         vector<vector<int>>ans;
-        vector<int> temp;
-        subseq(nums,0,ans,temp);
+        vector<vector<int>>ans;
+        vector<int>temp;
+        solver(0,nums,temp,ans);
         return ans;
-        
     }
 };
