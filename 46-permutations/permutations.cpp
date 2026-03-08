@@ -1,25 +1,23 @@
 class Solution {
 public:
-   void permutopti(vector<int>&nums,vector<vector<int>>&ans,int index)
+void solver(int i,vector<int>&nums,vector<vector<int>>&ans)
 {
-    if(index==nums.size())
+    if(i==nums.size())
     {
         ans.push_back(nums);
+        return;
     }
-    for(int i=index;i<nums.size();i++)
+    //pick
+    for(int j=i;j<nums.size();j++)
     {
-        swap(nums[index],nums[i]);
-        permutopti(nums,ans,index+1);
-        swap(nums[index],nums[i]);
-
-
+        swap(nums[i],nums[j]);
+        solver(i+1,nums,ans);
+        swap(nums[i],nums[j]); //backtraking
     }
 }
- vector<vector<int>> permute(vector<int>& nums) 
- {
-    vector<vector<int>>ans;
-    permutopti(nums,ans, 0);
-    return ans;
- }
-
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int>>ans;
+        solver(0,nums,ans);
+        return ans;
+    }
 };
