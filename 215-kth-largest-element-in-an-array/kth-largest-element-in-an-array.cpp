@@ -7,7 +7,7 @@ public:
             pq.push(p);
         }
         int result;
-        while(k>0)
+        while(k)
         {
             result=pq.top();
             pq.pop();
